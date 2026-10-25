@@ -1,0 +1,16 @@
+{
+  "name": "biaks-security-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local educational SQL injection laboratory for BIaKS",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/server.js",
+    "reset-db": "node src/modules/sql-injection/database.js --reset"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.0.0",
+    "express": "^5.1.0"
+  }
+}
