@@ -18,6 +18,7 @@ npm-debug.log*
 
 # PDF documents
 *.pdf
+*.docx
 
 # SQLite temporary files
 data/*.sqlite-wal
