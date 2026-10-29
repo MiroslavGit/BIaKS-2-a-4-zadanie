@@ -1,0 +1,44 @@
+
+name: Mirror to GitLab TUKE
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gitlab-mirror-main
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Push to GitLab TUKE
+        shell: bash
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if [[ -z "$GITLAB_TOKEN" ]]; then
+            echo "Missing GITLAB_TOKEN secret"
+            exit 1
+          fi
+
+          REMOTE="https://git.kpi.fei.tuke.sk/miroslav.hanisko/BIaKS-2-a-4-zadanie.git"
+
+          AUTH_HEADER="$(printf 'oauth2:%s' "$GITLAB_TOKEN" | base64 -w0)"
+
+          git -c "http.extraheader=AUTHORIZATION: basic $AUTH_HEADER" \
+            push "$REMOTE" HEAD:refs/heads/main
