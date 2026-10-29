@@ -50,7 +50,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   const db = openDatabase();
   try {
     resetDatabase(db);
-    console.log(`SQL Injection database reset: ${SEED_USERS.length} synthetic users restored.`);
+    console.log(`Databáza bola obnovená. Počet syntetických účtov: ${SEED_USERS.length}.`);
   } finally {
     db.close();
   }

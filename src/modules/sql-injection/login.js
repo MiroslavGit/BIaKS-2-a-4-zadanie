@@ -14,33 +14,33 @@ const ATTACK_EXPLANATIONS = [
   {
     username: "' OR 1=1 --",
     password: 'anything',
-    vulnerable: 'Apostrof ukončil username. OR 1=1 pridal vždy pravdivú podmienku a -- zakomentovalo kontrolu hesla. SQLite preto vrátil všetky účty a .all() ich načítalo všetky. Výsledok obsahuje aj heslá skutočne uložené v databáze; anything je iba vstup, ktorý sa nekontroloval.',
-    secure: 'Celý vstup \' OR 1=1 -- je naviazaný ako hodnota username. OR nemení podmienku a -- nevytvára komentár. Parametrizovaný dotaz hľadá presne toto meno a zadané heslo; taký účet neexistuje, preto prihlásenie odmietol.',
+    vulnerable: 'Apostrof ukončil používateľské meno. OR 1=1 pridal vždy pravdivú podmienku a -- zakomentovalo kontrolu hesla. SQLite preto vrátil všetky účty a .all() ich načítalo všetky. Výsledok obsahuje aj heslá skutočne uložené v databáze; anything je iba vstup, ktorý sa nekontroloval.',
+    secure: 'Celý vstup \' OR 1=1 -- je naviazaný ako hodnota mena. OR nemení podmienku a -- nevytvára komentár. Parametrizovaný dotaz hľadá presne toto meno a zadané heslo; taký účet neexistuje, preto prihlásenie odmietol.',
   },
   {
     username: "admin' --",
     password: 'wrong-password',
-    vulnerable: 'Apostrof za admin ukončil username a -- zakomentovalo kontrolu hesla. Zostalo iba username = \'admin\', preto SQLite vrátil tento účet aj jeho skutočné uložené heslo. wrong-password je zadaný vstup, nie heslo účtu v databáze. Tento SELECT heslo nemení.',
+    vulnerable: 'Apostrof za admin ukončil meno a -- zakomentovalo kontrolu hesla. Zostalo iba username = \'admin\', preto SQLite vrátil tento účet aj jeho skutočné uložené heslo. wrong-password je zadaný vstup, nie heslo účtu v databáze. Tento SELECT heslo nemení.',
     secure: 'Hodnota admin\' -- sa porovnáva ako celé používateľské meno. Apostrof ani -- nemenia SQL štruktúru a kontrola hesla zostáva aktívna. Taká dvojica mena a hesla neexistuje, preto prihlásenie neprešlo.',
   },
   {
     username: "'; UPDATE users SET password = 'changed123' WHERE username = 'student'; --",
     password: 'anything',
-    secure: 'Celý vstup vrátane bodkočiarok a UPDATE je jediná hodnota parametra username. Stále sa vykoná iba pripravený SELECT. Žiadny účet nemá toto meno; prihlasovanie sa odmietlo a heslo sa nezmenilo.',
+    secure: 'Celý vstup vrátane bodkočiarok a UPDATE je jediná hodnota parametra mena. Stále sa vykoná iba pripravený SELECT. Žiadny účet nemá toto meno; prihlasovanie sa odmietlo a heslo sa nezmenilo.',
   },
 ];
 
 function explanation(mode, outcome, inputs) {
   if (outcome === 'sql-error') {
-    return 'SQLite odmietol príkaz alebo jeho syntax. Laboratórium prijíma čítací SELECT alebo obmedzenú ukážku SELECT + UPDATE users SET password s výberom jedného username. Iné dávky SQL nie sú povolené. Skontrolujte presný SQL v inspectore.';
+    return 'SQLite odmietol príkaz alebo jeho syntax. Laboratórium prijíma čítací SELECT alebo obmedzenú ukážku SELECT + UPDATE users SET password s výberom jedného mena. Iné dávky SQL nie sú povolené. Skontrolujte presný SQL v inšpektore.';
   }
   const attack = ATTACK_EXPLANATIONS.find(({ username, password }) =>
     username === inputs.username && password === inputs.password);
   if (mode === 'secure') {
-    return outcome === 'authenticated' ? 'SQLite porovnal samostatne viazané parametre s uloženými údajmi. Prihlasovacie údaje sú správne.' : attack?.secure ?? 'SQLite spracoval username a password ako samostatne viazané hodnoty. Obsah parametrov sa nevyhodnocuje ako SQL kód a nemôže zmeniť štruktúru dotazu. Žiadny účet nezodpovedá zadanému menu a heslu.';
+    return outcome === 'authenticated' ? 'SQLite porovnal samostatne viazané parametre s uloženými údajmi. Prihlasovacie údaje sú správne.' : attack?.secure ?? 'SQLite spracoval meno a heslo ako samostatne viazané hodnoty. Obsah parametrov sa nevyhodnocuje ako SQL kód a nemôže zmeniť štruktúru dotazu. Žiadny účet nezodpovedá zadanému menu a heslu.';
   }
   if (outcome === 'bypassed') {
-    return attack?.vulnerable ?? 'SQLite vrátil riadok, hoci zadaná dvojica username/password nie je platná. V tomto režime sa vstup stal súčasťou SQL príkazu a mohol zmeniť jeho podmienku alebo výsledok. Aplikácia prijala skutočný výsledok dotazu. Presný účinok vlastného payloadu posúďte podľa zobrazeného SQL; v secure režime zostane vstup iba hodnotou parametra.';
+    return attack?.vulnerable ?? 'SQLite vrátil riadok, hoci zadané meno a heslo nie sú platné. V tomto režime sa vstup stal súčasťou SQL príkazu a mohol zmeniť jeho podmienku alebo výsledok. Aplikácia prijala skutočný výsledok dotazu. Presný účinok vlastného vstupu posúďte podľa zobrazeného SQL; v zabezpečenom režime zostane vstup iba hodnotou parametra.';
   }
   return outcome === 'authenticated' ? 'SQL dotaz vrátil používateľa a zadané prihlasovacie údaje sa zhodujú s databázou. Bežné prihlásenie uspelo.' : 'SQL dotaz nevrátil žiadneho používateľa. Podmienka WHERE nebola splnená a prihlásenie bolo zamietnuté.';
 }
@@ -82,7 +82,7 @@ function executePasswordBatch(db, query, inputs) {
       inspector: {
         query, inputs, parameters: null, affectedRows,
         result: { affectedRows, accountsAfter }, sqlError: null,
-        explanation: affectedRows > 0 ? 'Apostrof ukončil username a prvá bodkočiarka ukončila pôvodný SELECT. Nasledujúci UPDATE je celý napísaný v poli Username a SQLite ho vykonal ako druhý príkaz. -- zakomentovalo zvyšok pôvodného prihlasovania. Počet dotknutých riadkov aj účty po zápise pochádzajú z databázy; cieľ aj nové heslo určuje text payloadu. V secure režime zostáva celý vstup iba parametrom SELECT.' : 'Dávka SQL sa vykonala, ale UPDATE nenašiel uvedené username. Žiadne heslo sa nezmenilo.',
+        explanation: affectedRows > 0 ? 'Apostrof ukončil meno a prvá bodkočiarka ukončila pôvodný SELECT. Nasledujúci UPDATE je celý napísaný v poli Používateľské meno a SQLite ho vykonal ako druhý príkaz. -- zakomentovalo zvyšok pôvodného prihlasovania. Počet dotknutých riadkov aj účty po zápise pochádzajú z databázy; cieľ aj nové heslo určuje zadaný text. V zabezpečenom režime zostáva celý vstup iba parametrom SELECT.' : 'Dávka SQL sa vykonala, ale UPDATE nenašiel uvedené meno. Žiadne heslo sa nezmenilo.',
       },
     };
   })();
@@ -97,10 +97,15 @@ export function vulnerableLogin(db, inputs) {
     if (PASSWORD_BATCH.test(query)) return executePasswordBatch(db, query, inputs);
     // All other inputs must remain a single read-only statement.
     const statement = db.prepare(query);
-    if (!statement.reader || !statement.readonly) throw new Error('Only a single read-only SELECT is allowed.');
+    if (!statement.reader || !statement.readonly) throw new Error('Povolený je iba jeden čítací príkaz SELECT.');
     return result(db, 'vulnerable', query, inputs, statement.all());
   } catch (error) {
-    return result(db, 'vulnerable', query, inputs, [], error.message);
+    const message = error.message.includes('more than one statement')
+      ? 'Vstup obsahuje nepovolenú dávku SQL príkazov.'
+      : /syntax error|unrecognized token|incomplete input/.test(error.message)
+        ? 'SQL príkaz má neplatnú syntax alebo neukončenú textovú hodnotu.'
+        : 'Databáza nedokázala vykonať tento SQL príkaz.';
+    return result(db, 'vulnerable', query, inputs, [], message);
   }
 }
 

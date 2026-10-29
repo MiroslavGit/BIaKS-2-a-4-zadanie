@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="sk">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="BIaKS: a local, interactive cybersecurity laboratory with real SQL injection and parameterized query demonstrations.">
-  <title>BIaKS Security Lab</title>
+  <meta name="description" content="Lokálne interaktívne laboratórium BIaKS s reálnymi SQL útokmi a parametrizovanými dotazmi.">
+  <title>Bezpečnostné laboratórium BIaKS</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
   <script src="/app.js" defer></script>
@@ -22,67 +22,67 @@
     <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
     <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3v17h17M8 16v-5m5 5V7m5 9V4"/></symbol>
   </svg>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Preskočiť na obsah</a>
   <aside class="sidebar">
-    <a class="brand" href="/" aria-label="BIaKS Security Lab home"><span class="brand-mark"><svg class="icon"><use href="#i-shield"/></svg></span><span>BIaKS<span class="brand-sub">SECURITY LAB</span></span></a>
-    <div class="sidebar-label">WORKSPACE</div>
-    <nav aria-label="Main navigation">
-      <a class="nav-link" id="nav-home" href="/"><svg class="icon"><use href="#i-home"/></svg>Overview</a>
-      <a class="nav-link" id="nav-sql" href="/sql-injection"><svg class="icon"><use href="#i-terminal"/></svg>SQL Injection<span class="nav-number">02</span></a>
-      <span class="nav-link nav-disabled"><svg class="icon"><use href="#i-chart"/></svg>Inference Attack<svg class="icon small"><use href="#i-lock"/></svg></span>
+    <a class="brand" href="/" aria-label="Domovská stránka bezpečnostného laboratória BIaKS"><span class="brand-mark"><svg class="icon"><use href="#i-shield"/></svg></span><span>BIaKS<span class="brand-sub">BEZPEČNOSTNÉ LAB.</span></span></a>
+    <div class="sidebar-label">LABORATÓRIÁ</div>
+    <nav aria-label="Hlavná navigácia">
+      <a class="nav-link" id="nav-home" href="/"><svg class="icon"><use href="#i-home"/></svg>Prehľad</a>
+      <a class="nav-link" id="nav-sql" href="/sql-injection"><svg class="icon"><use href="#i-terminal"/></svg>SQL injekcia<span class="nav-number">02</span></a>
+      <span class="nav-link nav-disabled"><svg class="icon"><use href="#i-chart"/></svg>Inferenčný útok<svg class="icon small"><use href="#i-lock"/></svg></span>
     </nav>
   </aside>
   <div class="workspace">
-    <header class="topbar"><div class="breadcrumb">Workspace<span>/</span><strong id="breadcrumb-page">Overview</strong></div></header>
+    <header class="topbar"><div class="breadcrumb">Laboratórium<span>/</span><strong id="breadcrumb-page">Prehľad</strong></div></header>
     <main id="main">
       <section id="home-page" hidden>
-        <div class="home-heading"><div><h1>BIaKS Security Lab<span class="heading-dot">.</span></h1><p class="subtitle">Interactive Cybersecurity Laboratory</p></div></div>
+        <div class="home-heading"><div><h1>Bezpečnostné laboratórium BIaKS<span class="heading-dot">.</span></h1><p class="subtitle">Interaktívne laboratórium kybernetickej bezpečnosti</p></div></div>
         <div class="module-grid">
-          <article class="module-card available"><div class="module-top"><span class="module-icon"><svg class="icon"><use href="#i-terminal"/></svg></span><span class="badge badge-green"><span class="dot"></span>Available</span></div><div class="eyebrow">ASSIGNMENT 02</div><h2>SQL Injection</h2><p>Compare three SQL injection attacks with parameterized queries.</p><div class="module-footer"><a class="button primary" href="/sql-injection">Launch Lab<svg class="icon"><use href="#i-arrow"/></svg></a></div></article>
-          <article class="module-card coming-soon"><div class="module-top"><span class="module-icon"><svg class="icon"><use href="#i-chart"/></svg></span><span class="badge badge-neutral">Coming Soon</span></div><div class="eyebrow">ASSIGNMENT 04</div><h2>Inference Attack</h2><p>Explore how aggregate queries can reveal individual data.</p><div class="module-footer"><button class="button secondary" disabled><svg class="icon"><use href="#i-lock"/></svg>Coming Soon</button></div></article>
+          <article class="module-card available"><div class="module-top"><span class="module-icon"><svg class="icon"><use href="#i-terminal"/></svg></span><span class="badge badge-green"><span class="dot"></span>Dostupné</span></div><div class="eyebrow">ZADANIE 02</div><h2>SQL injekcia</h2><p>Porovnajte tri SQL útoky s parametrizovanými dotazmi.</p><div class="module-footer"><a class="button primary" href="/sql-injection">Otvoriť<svg class="icon"><use href="#i-arrow"/></svg></a></div></article>
+          <article class="module-card coming-soon"><div class="module-top"><span class="module-icon"><svg class="icon"><use href="#i-chart"/></svg></span><span class="badge badge-neutral">Pripravuje sa</span></div><div class="eyebrow">ZADANIE 04</div><h2>Inferenčný útok</h2><p>Zistite, ako agregované dotazy môžu odhaliť údaje jednotlivca.</p><div class="module-footer"><button class="button secondary" disabled><svg class="icon"><use href="#i-lock"/></svg>Pripravuje sa</button></div></article>
         </div>
       </section>
       <section id="lab-page" hidden>
-        <div class="lab-heading"><div><div class="eyebrow"><span class="accent-line"></span> ASSIGNMENT 02</div><h1>SQL Injection<span class="heading-dot">.</span></h1><p class="subtitle">Compare vulnerable and parameterized SQL.</p></div><button class="button secondary" id="reset-button"><svg class="icon"><use href="#i-reset"/></svg>Reset database</button></div>
+        <div class="lab-heading"><div><div class="eyebrow"><span class="accent-line"></span> ZADANIE 02</div><h1>SQL injekcia<span class="heading-dot">.</span></h1><p class="subtitle">Porovnajte zraniteľné a parametrizované SQL.</p></div><button class="button secondary" id="reset-button"><svg class="icon"><use href="#i-reset"/></svg>Obnoviť databázu</button></div>
         <div id="notification" class="notification" role="status" hidden></div>
         <div class="lab-grid">
-          <section class="panel login-panel" aria-labelledby="login-heading"><div class="panel-heading"><h2 id="login-heading"><svg class="icon"><use href="#i-lock"/></svg>Authentication</h2></div><p class="panel-description">Choose a mode and enter your test credentials.</p>
-            <div class="mode-toggle" role="group" aria-label="Login mode"><button id="mode-vulnerable" class="mode-button selected" aria-pressed="true">Vulnerable</button><button id="mode-secure" class="mode-button" aria-pressed="false">Secure</button></div>
-            <div class="mode-hint" id="mode-hint"><span class="mode-dot"></span><span id="mode-description">Input is concatenated directly into SQL.</span></div>
-            <form id="login-form" autocomplete="off"><label for="username">Username</label><div class="input-wrapper"><span aria-hidden="true">@</span><textarea id="username" name="username" rows="3" placeholder="Enter username or SQL payload" maxlength="500" required autocapitalize="off" spellcheck="false"></textarea></div><div class="password-label"><label id="password-field-label" for="password">Password</label><button type="button" class="text-button" id="show-password" aria-pressed="false" aria-controls="password">Show</button></div><div class="input-wrapper"><svg class="icon"><use href="#i-lock"/></svg><input id="password" name="password" type="password" placeholder="Enter test password" maxlength="500" required></div><button class="button primary login-button" type="submit" id="login-button">Login<svg class="icon"><use href="#i-arrow"/></svg></button></form>
-            <div id="login-result" class="login-result" role="status"><span class="result-idle-mark">→</span><div><strong>Ready to experiment</strong><p>Load a scenario below, then click Login.</p></div></div>
-            <div class="credentials-note"><span class="mini-label">DEFAULT ACCOUNTS (AFTER RESET)</span><div><code>admin / admin123</code><span>administrator</span></div><div><code>student / student123</code><span>student</span></div><div><code>guest / guest123</code><span>guest</span></div></div>
+          <section class="panel login-panel" aria-labelledby="login-heading"><div class="panel-heading"><h2 id="login-heading"><svg class="icon"><use href="#i-lock"/></svg>Prihlásenie</h2></div><p class="panel-description">Vyberte režim a zadajte testovacie prihlasovacie údaje.</p>
+            <div class="mode-toggle" role="group" aria-label="Režim prihlasovania"><button id="mode-vulnerable" class="mode-button selected" aria-pressed="true">Zraniteľný</button><button id="mode-secure" class="mode-button" aria-pressed="false">Zabezpečený</button></div>
+            <div class="mode-hint" id="mode-hint"><span class="mode-dot"></span><span id="mode-description">Vstup sa vkladá priamo do SQL.</span></div>
+            <form id="login-form" autocomplete="off" novalidate><label for="username">Používateľské meno</label><div class="input-wrapper"><span aria-hidden="true">@</span><textarea id="username" name="username" rows="3" placeholder="Zadajte meno alebo SQL vstup" maxlength="500" required autocapitalize="off" spellcheck="false"></textarea></div><div class="password-label"><label id="password-field-label" for="password">Heslo</label><button type="button" class="text-button" id="show-password" aria-pressed="false" aria-controls="password">Zobraziť</button></div><div class="input-wrapper"><svg class="icon"><use href="#i-lock"/></svg><input id="password" name="password" type="password" placeholder="Zadajte testovacie heslo" maxlength="500" required></div><button class="button primary login-button" type="submit" id="login-button">Prihlásiť sa<svg class="icon"><use href="#i-arrow"/></svg></button></form>
+            <div id="login-result" class="login-result" role="status"><span id="result-icon" class="result-idle-mark">→</span><div><strong id="result-title">Pripravené na skúšanie</strong><p id="result-detail">Vyberte príklad nižšie a kliknite na Prihlásiť sa.</p></div></div>
+            <div class="credentials-note"><span class="mini-label">PÔVODNÉ ÚČTY (PO OBNOVENÍ)</span><div><code>admin / admin123</code><span>správca</span></div><div><code>student / student123</code><span>študent</span></div><div><code>guest / guest123</code><span>hosť</span></div></div>
           </section>
-          <section class="panel inspector-panel" aria-labelledby="inspector-heading"><div class="panel-heading"><h2 id="inspector-heading"><svg class="icon"><use href="#i-code"/></svg>Query Inspector</h2><span class="badge badge-neutral" id="inspector-mode">AWAITING QUERY</span></div><p class="panel-description">SQL and result from the last executed action.</p><div class="code-window"><div class="code-toolbar"><span><span class="terminal-dot"></span>SQL / SQLite</span><button class="text-button" id="copy-query" disabled>Copy query</button></div><pre id="query-code" aria-label="SQL statement"><code>-- Submit an action to inspect the SQL.</code></pre></div>
-            <div class="inspector-details"><div><span class="mini-label">INPUT VALUES</span><pre id="input-values">No request yet.</pre></div><div><span class="mini-label" id="binding-label">QUERY CONSTRUCTION</span><pre id="parameter-values">Waiting for execution.</pre></div></div>
-            <div class="execution-heading"><span class="mini-label">EXECUTION RESULT</span><span id="row-count">— rows returned</span></div><pre class="result-code" id="execution-result">No query has been executed.</pre><div class="explanation" lang="sk"><span class="explanation-icon">i</span><p id="technical-explanation">Vyberte pripravený príklad a kliknite na Login. Tento panel potom zobrazí presný SQL dotaz a skutočný výsledok databázy.</p></div>
+          <section class="panel inspector-panel" aria-labelledby="inspector-heading"><div class="panel-heading"><h2 id="inspector-heading"><svg class="icon"><use href="#i-code"/></svg>SQL inšpektor</h2><span class="badge badge-neutral" id="inspector-mode">ČAKÁ NA DOTAZ</span></div><p class="panel-description">SQL a výsledok posledného pokusu.</p><div class="code-window"><div class="code-toolbar"><span><span class="terminal-dot"></span>SQL / SQLite</span><button class="text-button" id="copy-query" disabled>Kopírovať SQL</button></div><pre id="query-code" aria-label="SQL dotaz"><code>-- Odošlite formulár a zobrazí sa SQL.</code></pre></div>
+            <div class="inspector-details"><div><span class="mini-label">VSTUPNÉ HODNOTY</span><pre id="input-values">Zatiaľ bez požiadavky.</pre></div><div><span class="mini-label" id="binding-label">ZOSTAVENIE DOTAZU</span><pre id="parameter-values">Čaká sa na vykonanie.</pre></div></div>
+            <div class="execution-heading"><span class="mini-label">VÝSLEDOK VYKONANIA</span><span id="row-count">— vrátených riadkov</span></div><pre class="result-code" id="execution-result">Zatiaľ sa nevykonal žiadny dotaz.</pre><div class="explanation" lang="sk"><span class="explanation-icon">i</span><p id="technical-explanation">Vyberte pripravený príklad a kliknite na Prihlásiť sa. Tento panel potom zobrazí presný SQL dotaz a skutočný výsledok databázy.</p></div>
           </section>
         </div>
-        <div class="section-heading examples-heading"><h2>Attack examples</h2><span>LOAD A SCENARIO → EXECUTE THE ACTION</span></div>
+        <div class="section-heading examples-heading"><h2>Príklady útokov</h2><span>VYBERTE PRÍKLAD → PRIHLÁSIŤ SA</span></div>
         <div class="scenario-grid">
           <button type="button" class="scenario-card" data-scenario="normal" aria-pressed="false">
             <span class="scenario-icon success-icon"><svg class="icon"><use href="#i-check"/></svg></span>
-            <span class="scenario-content"><strong>Normal login</strong><span>Valid credentials</span><code>student / student123</code></span>
+            <span class="scenario-content"><strong>Bežné prihlásenie</strong><span>Správne prihlasovacie údaje</span><code>student / student123</code></span>
             <svg class="icon scenario-arrow"><use href="#i-arrow"/></svg>
           </button>
           <button type="button" class="scenario-card" data-scenario="wrong" aria-pressed="false">
             <span class="scenario-icon neutral-icon"><svg class="icon"><use href="#i-lock"/></svg></span>
-            <span class="scenario-content"><strong>Wrong password</strong><span>Login should be rejected</span><code>student / wrong-password</code></span>
+            <span class="scenario-content"><strong>Nesprávne heslo</strong><span>Prihlásenie sa má zamietnuť</span><code>student / wrong-password</code></span>
             <svg class="icon scenario-arrow"><use href="#i-arrow"/></svg>
           </button>
           <button type="button" class="scenario-card attack-scenario" data-scenario="bypass" aria-pressed="false">
             <span class="scenario-icon danger-icon"><svg class="icon"><use href="#i-code"/></svg></span>
-            <span class="scenario-content"><strong>Authentication bypass</strong><span>Return all accounts and stored passwords</span><code>' OR 1=1 -- / anything</code></span>
+            <span class="scenario-content"><strong>Obídenie prihlásenia</strong><span>Výpis všetkých účtov a uložených hesiel</span><code>' OR 1=1 -- / anything</code></span>
             <svg class="icon scenario-arrow"><use href="#i-arrow"/></svg>
           </button>
           <button type="button" class="scenario-card attack-scenario" data-scenario="targeted" aria-pressed="false">
             <span class="scenario-icon danger-icon"><svg class="icon"><use href="#i-lock"/></svg></span>
-            <span class="scenario-content"><strong>Targeted account bypass</strong><span>Read admin's stored password</span><code>admin' -- / wrong-password</code></span>
+            <span class="scenario-content"><strong>Cielené obídenie prihlásenia</strong><span>Získanie hesla účtu admin</span><code>admin' -- / wrong-password</code></span>
             <svg class="icon scenario-arrow"><use href="#i-arrow"/></svg>
           </button>
           <button type="button" class="scenario-card attack-scenario" data-scenario="change" aria-pressed="false">
             <span class="scenario-icon danger-icon"><svg class="icon"><use href="#i-db"/></svg></span>
-            <span class="scenario-content"><strong>Password change</strong><span>Inject an UPDATE after the login SELECT</span><code>'; UPDATE users SET password = 'changed123' WHERE username = 'student'; --</code></span>
+            <span class="scenario-content"><strong>Zmena hesla</strong><span>Pridanie UPDATE za prihlasovací SELECT</span><code>'; UPDATE users SET password = 'changed123' WHERE username = 'student'; --</code></span>
             <svg class="icon scenario-arrow"><use href="#i-arrow"/></svg>
           </button>
         </div>

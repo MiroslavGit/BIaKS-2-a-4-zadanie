@@ -5,7 +5,7 @@ import { secureLogin, vulnerableLogin } from './login.js';
 function credentials(req, res, next) {
   const { username, password } = req.body ?? {};
   if (typeof username !== 'string' || typeof password !== 'string' || username.length === 0 || password.length === 0 || username.length > 500 || password.length > 500) {
-    return res.status(400).json({ error: 'Username and password must be non-empty strings of at most 500 characters.' });
+    return res.status(400).json({ error: 'Meno a heslo musia byť neprázdne texty s najviac 500 znakmi.' });
   }
   // Do not trim or escape: the original values matter for the demonstration.
   req.credentials = { username, password };
@@ -23,7 +23,7 @@ export function sqlInjectionRouter(db) {
   });
   router.post('/reset', (_req, res) => {
     resetDatabase(db);
-    res.json({ success: true, message: 'Synthetic database restored.', users: 3 });
+    res.json({ success: true, message: 'Databáza so syntetickými účtami bola obnovená.', users: 3 });
   });
   return router;
 }

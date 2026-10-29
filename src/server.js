@@ -4,12 +4,12 @@ import { openDatabase } from './modules/sql-injection/database.js';
 const db = openDatabase();
 const app = createApp({ sqlInjectionDb: db });
 const server = app.listen(3000, '127.0.0.1', () => {
-  console.log('BIaKS Security Lab → http://localhost:3000');
-  console.log('Listening only on 127.0.0.1. Intentionally vulnerable educational environment.');
+  console.log('Bezpečnostné laboratórium BIaKS → http://localhost:3000');
+  console.log('Server počúva iba na 127.0.0.1. Zámerne zraniteľné školské prostredie.');
 });
 
 server.on('error', (error) => {
-  console.error(error.code === 'EADDRINUSE' ? 'Port 3000 is already in use. Stop the other server and retry.' : error);
+  console.error(error.code === 'EADDRINUSE' ? 'Port 3000 je obsadený. Ukončite druhý server a skúste to znova.' : error);
   db.close();
   process.exitCode = 1;
 });
